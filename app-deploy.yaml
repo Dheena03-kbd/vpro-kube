@@ -17,15 +17,15 @@ spec:
       containers:
       - name: vproapp
         image: amrish24/vprofileapp:latest
-        imagePullSecrets:
-          - name:  secret-docker
         ports:
         - name: vproapp-port
           containerPort: 8080
+      imagePullSecrets:
+          - name:  secret-docker
       initContainers:
       - name: init-app1
         image: busybox:latest
-        command: ['sh', '-c', 'until nslookup vprodb; do echo waiting for db; sleep 2; done;']
+        command: ['sh', '-c', 'until nslookup vprodb; do echo waiting for mydb; sleep 2; done;']
       - name: init-app2
         image: busybox:latest
         command: ['sh', '-c', 'until nslookup vprocache01; do echo waiting for mc; sleep 2; done;']

@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mc-service
+  name: vprocache01
 spec:
   selector:
     app: vprocache01
   ports:
   - port: 11211
-    targetPort: vprocache01-port
+    targetPort: vprocache-port
     protocol: TCP
   type: ClusterIP
