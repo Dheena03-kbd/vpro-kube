@@ -23,14 +23,14 @@ spec:
       ports:
       - name: vprodb-port
         containerPort: 3306
-      imagePullSecrets:
-        - name: secret-docker
       env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name:  app-secret
               key:  db-pass
+    imagePullSecrets:
+      - name: secret-docker
     nodeSelector:
       zone: us-east-1a
     volumes:
