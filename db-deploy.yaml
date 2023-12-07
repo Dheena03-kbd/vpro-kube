@@ -13,35 +13,35 @@ spec:
     metadata:
       labels:
         app: vprodb
-    spec:
-      containers:
-      - name: vprodb
-        image: amrish24/vprofiledb:latest
+  spec:
+    containers:
+    - name: vprodb
+      image: amrish24/vprofiledb:latest
+      volumeMounts:
+        - name:  vprodb-data
+          mountPath: /var/lib/mysql
+      ports:
+      - name: vprodb-port
+        containerPort: 3306
+      imagePullSecrets:
+        - name: secret-docker
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name:  app-secret
+              key:  db-pass
+    nodeSelector:
+      zone: us-east-1a
+    volumes:
+      - name: vprodb-data
+        awsElasticBlockStore:
+          volumeID: vol-0f6170502bc081d4b
+          fsType: ext4
+    initContainers:
+      - name: init-db
+        image: busybox:latest
         volumeMounts:
-          - name:  vprodb-data
+          - name: vprodb-data
             mountPath: /var/lib/mysql
-        ports:
-        - name: vprodb-port
-          containerPort: 3306
-        imagePullSecrets:
-          - name: secret-docker
-        env:
-          - name: MYSQL_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name:  app-secret
-                key:  db-pass
-      nodeSelector:
-        zone: us-east-1a
-      volumes:
-        - name: vprodb-data
-          awsElasticBlockStore:
-            volumeID: vol-0f6170502bc081d4b
-            fsType: ext4
-      initContainers:
-        - name: init-db
-          image: busybox:latest
-          volumeMounts:
-            - name: vprodb-data
-              mountPath: /var/lib/mysql
-          command: ['rm', '-rf', '/var/lib/mysql/lost+found']
+        command: ['rm', '-rf', '/var/lib/mysql/lost+found']
