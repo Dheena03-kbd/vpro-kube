@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vprocache01
+  name: vprocache01-deploy
   labels:
     app: vprocache01
 spec:
