@@ -1,0 +1,8 @@
+kops create cluster --name=vpro-kube.amops.xyz \
+--state=s3://vpro-kube --zone=us-east-1a,us-east-1b\
+--node-count=2 --node-size=t2.small --master-size=t2.medium --dns-zone=vpro-kube.amops.xyz \
+--node-volume-size=8 --master-volume-size=8
+
+kops update cluster --name vpro-kube.amops.xyz --state=s3://vpro-kube --yes --admin
+
+kops validate cluter vpro-kops.amops.xyz --state=s3://vpro-kube
