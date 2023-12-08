@@ -6,3 +6,5 @@ kops create cluster --name=vpro-kube.amops.xyz \
 kops update cluster --name=vpro-kube.amops.xyz --state=s3://vpro-kube --yes --admin
 
 kops validate cluster --state=s3://vpro-kube
+
+kops delete cluster --name=vpro.amops.xyz --state=s3://vpro.amops --yes
