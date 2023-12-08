@@ -21,7 +21,7 @@ spec:
         - name: vproapp-port
           containerPort: 8080
       imagePullSecrets:
-          - name:  secret-docker
+      - name:  secret-docker
       initContainers:
       - name: init-app1
         image: busybox:latest
