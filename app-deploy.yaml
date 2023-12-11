@@ -16,12 +16,10 @@ spec:
     spec:
       containers:
       - name: vproapp
-        image: amrish24/vprofileapp:latest
+        image: dheenathayalanb/vprofileapp:latest
         ports:
         - name: vproapp-port
           containerPort: 8080
-      imagePullSecrets:
-      - name:  secret-docker
       initContainers:
       - name: init-app1
         image: busybox:latest

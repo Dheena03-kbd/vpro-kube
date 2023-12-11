@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: vprodb
-        image: amrish24/vprofiledb:latest
+        image: dheenathayalanb/vprofiledb:latest
         volumeMounts:
           - name:  vprodb-data
             mountPath: /var/lib/mysql
@@ -29,14 +29,12 @@ spec:
               secretKeyRef:
                 name:  app-secret
                 key:  db-pass
-      imagePullSecrets:
-      - name: secret-docker
       nodeSelector:
-        zone: us-east-1a
+        zone: us-west-2a
       volumes:
       - name: vprodb-data
         awsElasticBlockStore:
-          volumeID: vol-02f42091ef1f30f47
+          volumeID: vol-00cf797eb1e951707
           fsType: ext4
       initContainers:
       - name: init-db
